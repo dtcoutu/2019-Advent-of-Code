@@ -1,0 +1,40 @@
+#! /usr/bin/env bash
+
+arg0="$(basename "$0")"
+
+usage() { echo "Usage: $arg0 <day number>" >&2; exit 1; }
+
+[ $# -eq 1 ] || usage
+
+day_number=`printf "%02d" $1`
+day_string="day-$day_number"
+day_class="Day$day_number"
+
+if [ -d "$day_string" ]; then
+  echo "Directory $day_string already exists, not going to overwrite anything so exiting"
+  exit 2
+fi
+
+mkdir $day_string
+touch $day_string/$day_string.txt
+
+cat >${day_string}/${day_string}_spec.rb <<EOL
+require_relative '${day_string}'
+require 'minitest/autorun'
+
+class ${day_class}Test < Minitest::Test
+end
+EOL
+
+cat >${day_string}/${day_string}.rb <<EOL
+class ${day_class}
+
+  def self.run
+  end
+
+  def initialize(input)
+  end
+end
+
+${day_class}.run
+EOL
