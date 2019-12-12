@@ -30,11 +30,19 @@ cat >${day_string}/${day_string}.rb <<EOL
 class ${day_class}
 
   def self.run
+    input_data = File.read('./${day_string}.txt')
+    day = ${day_class}.new(input_data)
+    puts day.compute
   end
 
   def initialize(input)
+    @input = input
   end
-end
 
-${day_class}.run
+  def compute
+  end
+
+  private
+  attr_reader :input
+end
 EOL
