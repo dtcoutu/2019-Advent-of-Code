@@ -9,7 +9,7 @@ class Day03Test < Minitest::Test
     day03 = Day03.new(input)
     actual = day03.compute
 
-    assert_equal 6, actual
+    assert_equal [6, 30], actual
   end
 
   def test_given_example_one
@@ -19,7 +19,7 @@ class Day03Test < Minitest::Test
     day03 = Day03.new(input)
     actual = day03.compute
 
-    assert_equal 159, actual
+    assert_equal [159, 610], actual
   end
 
   # def test_given_example_two

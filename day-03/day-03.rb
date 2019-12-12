@@ -16,7 +16,11 @@ class Day03
 
     intersections = first_wire_points & second_wire_points
 
-    intersections.map { |i| distance_from_origin(i) }.min
+    closest_intersection = intersections.map { |i| distance_from_origin(i) }.min
+
+    shortest_steps = intersections.map { |i| sum_of_wire_steps(i, first_wire_points, second_wire_points) }.min
+
+    [closest_intersection, shortest_steps]
   end
 
   private
@@ -63,6 +67,13 @@ class Day03
       (point.x).abs + (point.y).abs
     end
 
+    def sum_of_wire_steps(intersection, first_wire_points, second_wire_points)
+      i1 = first_wire_points.find_index(intersection)
+      i2 = second_wire_points.find_index(intersection)
+
+      i1 + i2 + 2 # need to account for coming from origin
+    end
+
     class Point
       attr_reader :x, :y
       def initialize(x, y)
@@ -72,6 +83,10 @@ class Day03
 
       def to_s
         "Point(#{x}, #{y})"
+      end
+
+      def ==(o)
+        o.class == self.class && o.state == state
       end
 
       def eql?(o)
@@ -90,4 +105,4 @@ class Day03
     end
 end
 
-Day03.run
+# Day03.run
