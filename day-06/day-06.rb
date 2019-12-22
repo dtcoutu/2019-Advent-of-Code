@@ -31,13 +31,18 @@ class Day06
     remaining_orbitors = orbits.keys
 
     while orbitor = remaining_orbitors.pop
-      next_orbitor = orbits[orbitor]
+      count += count_orbits_for(orbitor)
+    end
 
-      if next_orbitor
-        remaining_orbitors.push(next_orbitor)
+    count
+  end
 
-        count += 1
-      end
+  def count_orbits_for(target)
+    count = 0
+
+    while orbits[target]
+      target = orbits[target]
+      count += 1
     end
 
     count
