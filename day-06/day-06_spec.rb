@@ -25,4 +25,10 @@ class Day06Test < Minitest::Test
     day = Day06.new(input)
     assert_equal 42, day.compute
   end
+
+  def test_orbital_transfers
+    input = "COM)B\nB)C\nC)D\nD)E\nE)F\nB)G\nG)H\nD)I\nE)J\nJ)K\nK)L\nK)YOU\nI)SAN"
+    day = Day06.new(input)
+    assert_equal 4, day.find_orbital_transfers
+  end
 end
